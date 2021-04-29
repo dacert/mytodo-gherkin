@@ -1,0 +1,21 @@
+{
+    "server": "hub-cloud.browserstack.com",
+    "username": "davidcervantes_98kFGm",
+    "access_key": "ste2n3o3W4BFyreeyk6S",
+  
+    "capabilities": {
+      "project": "First Junit4 Android Project",
+      "build": "Junit4 Android Parallel",
+      "name": "parallel_test",
+      "browserstack.debug": true,
+      "app": "WikipediaSample"
+    },
+  
+    "environments": [{
+      "device": "Google Pixel 3",
+      "os_version":  "9.0"
+    },{
+      "device": "Samsung Galaxy S10e",
+      "os_version":  "9.0"
+    }]
+}
