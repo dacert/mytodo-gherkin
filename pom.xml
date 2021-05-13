@@ -9,6 +9,7 @@
 
     <name>mytodo-gherkin</name>
 
+    <url>https://github.com/dacert/mytodo-gherkin</url>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

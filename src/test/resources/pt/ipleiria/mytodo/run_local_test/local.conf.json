@@ -9,7 +9,7 @@
       "name": "local_test",
       "browserstack.debug": true,
       "browserstack.local": true,
-      "app": "WikipediaSample"
+      "app" : "bs://7915f3c9a81e81b9017f228fecdc5d90d5b0dffb"
     },
   
     "environments": [{

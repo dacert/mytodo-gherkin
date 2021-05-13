@@ -20,29 +20,14 @@ public class LocalTest extends BrowserStackJUnitTest {
   @Test
   public void test() throws Exception {
     AndroidElement searchElement = (AndroidElement) new WebDriverWait(driver, 30).until(
-        ExpectedConditions.elementToBeClickable(MobileBy.id("com.example.android.basicnetworking:id/test_action")));
+            ExpectedConditions.elementToBeClickable(MobileBy.AccessibilityId("Search Wikipedia")));
     searchElement.click();
     AndroidElement insertTextElement = (AndroidElement) new WebDriverWait(driver, 30).until(
-        ExpectedConditions.elementToBeClickable(MobileBy.className("android.widget.TextView")));
+            ExpectedConditions.elementToBeClickable(MobileBy.id("org.wikipedia.alpha:id/search_src_text")));
+    insertTextElement.sendKeys("BrowserStack");
+    Thread.sleep(5000);
 
-    AndroidElement testElement = null;
-    List<AndroidElement> allTextViewElements = driver.findElementsByClassName("android.widget.TextView");
-    Thread.sleep(10);
-    for(AndroidElement textElement : allTextViewElements) {
-      if(textElement.getText().contains("The active connection is")) {
-        testElement = textElement;
-      }
-    }
-
-    if(testElement == null) {
-      File scrFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
-      FileUtils.copyFile(scrFile, new File(System.getProperty("user.dir") + "screenshot.png"));
-      System.out.println("Screenshot stored at " + System.getProperty("user.dir") + "screenshot.png");
-      throw new Error("Cannot find the needed TextView element from app");
-    }
-    String matchedString = testElement.getText();
-    System.out.println(matchedString);
-    assertTrue(matchedString.contains("The active connection is wifi"));
-    assertTrue(matchedString.contains("Up and running"));
+    List<AndroidElement> allProductsName = driver.findElementsByClassName("android.widget.TextView");
+    assertTrue(allProductsName.size() > 0);
   }
 }
