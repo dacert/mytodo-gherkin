@@ -106,4 +106,20 @@ public class GroupsStep {
         (new TouchAction((driver))).tap(TapOptions.tapOptions().withElement(ElementOption.element((driver).findElement(by)))).perform();
     }
 
+
+    @And("I tap the Groups menu item")
+    public void iTapTheGroupsMenuItem()throws Exception {
+        Utils.sleep(500);
+        By by = By.id("pt.ipleiria.mytodo:id/menu_item_groups");
+        (new TouchAction((driver))).tap(TapOptions.tapOptions().withElement(ElementOption.element((driver).findElement(by)))).perform();
+    }
+
+    @Then("The list of groups must have a size greater than {int}")
+    public void theListOfGroupsMustHaveASizeGreaterThan(int arg0) {
+        By by = By.id("pt.ipleiria.mytodo:id/group_list_item");
+        List<AndroidElement>list = driver.findElements(by);
+        assertTrue(list.size() > arg0);
+    }
+
+
 }
