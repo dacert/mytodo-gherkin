@@ -117,7 +117,7 @@ public class GroupsStep {
     @Then("The list of groups must have a size greater than {int}")
     public void theListOfGroupsMustHaveASizeGreaterThan(int arg0) {
         By by = By.id("pt.ipleiria.mytodo:id/group_list_item");
-        List<AndroidElement>list = driver.findElements(by);
+        List<AndroidElement> list = driver.findElements(by);
         assertTrue(list.size() > arg0);
     }
 
