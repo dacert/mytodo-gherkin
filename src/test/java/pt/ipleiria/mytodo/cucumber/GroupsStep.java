@@ -1,22 +1,29 @@
 package pt.ipleiria.mytodo.cucumber;
 
+import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.AndroidElement;
+import io.appium.java_client.touch.TapOptions;
+import io.appium.java_client.touch.offset.ElementOption;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
-import io.cucumber.java.en.When;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
+import org.junit.Assert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 import java.io.FileReader;
 import java.net.URL;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
+
+import static org.junit.Assert.assertTrue;
 
 public class GroupsStep {
     public AndroidDriver<AndroidElement> driver;
@@ -24,7 +31,7 @@ public class GroupsStep {
     @Before
     public void setUp() throws Exception {
         JSONParser parser = new JSONParser();
-        JSONObject config = (JSONObject) parser.parse(new FileReader("src/test/resources/pt/ipleiria/mytodo/run_parallel_test/parallel.conf.json"));
+        JSONObject config = (JSONObject) parser.parse(new FileReader("src/test/resources/pt/ipleiria/mytodo/cucumber/groups.conf.json"));
         JSONArray envs = (JSONArray) config.get("environments");
 
         DesiredCapabilities capabilities = new DesiredCapabilities();
@@ -71,54 +78,32 @@ public class GroupsStep {
     }
 
     @Given("I have authenticated in the app")
-    public void iHaveAuthenticatedInTheApp() {
+    public void iHaveAuthenticatedInTheApp() throws Exception {
+        By by;
+
+        // 2. Type '{{User}}' in 'login_email'
+        Utils.sleep(500);
+        by = By.id("pt.ipleiria.mytodo:id/login_email");
+        driver.findElement(by).sendKeys(ProjectParameters.User);
+
+        // 3. Type '{{Pass}}' in 'login_pass'
+        Utils.sleep(500);
+        by = By.id("pt.ipleiria.mytodo:id/login_pass");
+        driver.findElement(by).sendKeys(ProjectParameters.Pass);
+
+        // 4. Tap 'LOGIN'
+        Utils.sleep(500);
+        by = By.id("pt.ipleiria.mytodo:id/login_btn");
+        (new TouchAction((driver))).tap(TapOptions.tapOptions().withElement(ElementOption.element((driver).findElement(by)))).perform();
+
     }
 
-    @When("I go to Add group screen")
-    public void iGoToAddGroupScreen() {
+
+    @And("I tap the menu button")
+    public void iTapTheMenuButton() throws Exception {
+        Utils.sleep(500);
+        By by = By.xpath("//android.widget.ImageButton[@content-desc = 'Open navigation drawer']");
+        (new TouchAction((driver))).tap(TapOptions.tapOptions().withElement(ElementOption.element((driver).findElement(by)))).perform();
     }
 
-    @And("I enter {string} into the name input")
-    public void iEnterFooIntoTheNameInput() {
-    }
-
-    @And("I tap the {string} button")
-    public void iTapTheCreateButton() {
-    }
-
-    @Then("I should see a susses message")
-    public void iShouldSeeASussesMessage() {
-    }
-
-    @Then("I should see a {string} message")
-    public void iShouldSeeANameIsDuplicatedMessage() {
-    }
-
-    @Then("I should see an error text <Invalid>")
-    public void iShouldSeeAnErrorTextInvalid() {
-    }
-
-    @When("I go to Groups screen")
-    public void iGoToGroupsScreen() {
-    }
-
-    @Then("The list of groups must have a size greater than {int}")
-    public void theListOfGroupsMustHaveASizeGreaterThan(int arg0) {
-    }
-
-    @And("I tap in a {string} group")
-    public void iTapInADetailsGroup() {
-    }
-
-    @Then("I should see the Details screen of {string} group")
-    public void iShouldSeeTheDetailsScreenOfDetailsGroup() {
-    }
-
-    @And("I enter {string} into the member input")
-    public void iEnterEmailDominioComMailDominioComIntoTheMemberInput(int arg0) {
-    }
-
-    @And("I tap the {string} button in the confirmation dialog")
-    public void iTapTheOkButtonInTheConfirmationDialog() {
-    }
 }
