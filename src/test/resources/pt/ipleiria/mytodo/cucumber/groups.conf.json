@@ -4,16 +4,18 @@
     "access_key": "ste2n3o3W4BFyreeyk6S",
   
     "capabilities": {
-      "project": "First Junit4 Android Project",
-      "build": "Junit4 Android Local",
-      "name": "local_test",
+      "project": "MyToDo-Groups",
+      "build": "MyToDo-Groups",
+      "name": "groups_test",
       "browserstack.debug": true,
-      "browserstack.local": true,
-      "app": "WikipediaSample"
+      "app": "MyToDo"
     },
   
     "environments": [{
       "device": "Google Pixel 3",
+      "os_version":  "9.0"
+    },{
+      "device": "Samsung Galaxy S10e",
       "os_version":  "9.0"
     }]
 }

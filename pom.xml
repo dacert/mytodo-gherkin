@@ -9,13 +9,11 @@
 
     <name>mytodo-gherkin</name>
 
+    <url>https://github.com/dacert/mytodo-gherkin</url>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <surefire.version>2.19.1</surefire.version>
-
-        <test.file></test.file>
-        <config.file>default</config.file>
     </properties>
 
     <dependencies>
@@ -77,7 +75,7 @@
 
     <profiles>
         <profile>
-            <id>first</id>
+            <id>groups</id>
             <build>
                 <plugins>
                     <plugin>
@@ -85,41 +83,7 @@
                         <artifactId>maven-surefire-plugin</artifactId>
                         <configuration>
                             <includes>
-                                <include>pt/ipleiria/mytodo/run_first_test/FirstTest.java</include>
-                            </includes>
-                        </configuration>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-
-        <profile>
-            <id>local</id>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-surefire-plugin</artifactId>
-                        <configuration>
-                            <includes>
-                                <include>pt/ipleiria/mytodo/run_local_test/LocalTest.java</include>
-                            </includes>
-                        </configuration>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-
-        <profile>
-            <id>parallel</id>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-surefire-plugin</artifactId>
-                        <configuration>
-                            <includes>
-                                <include>pt/ipleiria/mytodo/run_parallel_test/ParallelTest.java</include>
+                                <include>pt/ipleiria/mytodo/cucumber/GroupsStep.java</include>
                             </includes>
                         </configuration>
                     </plugin>
