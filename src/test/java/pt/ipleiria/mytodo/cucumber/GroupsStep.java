@@ -101,7 +101,7 @@ public class GroupsStep {
 
     @And("I tap the menu button")
     public void iTapTheMenuButton() throws Exception {
-        Utils.sleep(500);
+        Utils.sleep(2000);
         By by = By.xpath("//android.widget.ImageButton[@content-desc = 'Open navigation drawer']");
         (new TouchAction((driver))).tap(TapOptions.tapOptions().withElement(ElementOption.element((driver).findElement(by)))).perform();
     }
@@ -109,13 +109,14 @@ public class GroupsStep {
 
     @And("I tap the Groups menu item")
     public void iTapTheGroupsMenuItem()throws Exception {
-        Utils.sleep(500);
+        Utils.sleep(1000);
         By by = By.id("pt.ipleiria.mytodo:id/menu_item_groups");
         (new TouchAction((driver))).tap(TapOptions.tapOptions().withElement(ElementOption.element((driver).findElement(by)))).perform();
     }
 
     @Then("The list of groups must have a size greater than {int}")
-    public void theListOfGroupsMustHaveASizeGreaterThan(int arg0) {
+    public void theListOfGroupsMustHaveASizeGreaterThan(int arg0) throws Exception {
+        Utils.sleep(2000);
         By by = By.id("pt.ipleiria.mytodo:id/group_list_item");
         List<AndroidElement> list = driver.findElements(by);
         assertTrue(list.size() > arg0);
