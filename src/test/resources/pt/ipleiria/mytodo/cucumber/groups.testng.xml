@@ -4,14 +4,14 @@
     <test name="ParallelTestPixel3">
         <parameter name="deviceIndex" value="0"/>
         <classes>
-            <class name="pt.ipleiria.mytodo.cucumber.GroupsStep"/>
+            <class name="pt.ipleiria.mytodo.cucumber.steps.GroupsStep"/>
         </classes>
     </test>
 
     <test name="ParallelTestGalaxy10e">
         <parameter name="deviceIndex" value="1"/>
         <classes>
-            <class name="pt.ipleiria.mytodo.cucumber.GroupsStep"/>
+            <class name="pt.ipleiria.mytodo.cucumber.steps.GroupsStep"/>
         </classes>
     </test>
 </suite>
