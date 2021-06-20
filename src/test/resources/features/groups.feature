@@ -38,3 +38,10 @@ Feature: Manage groups
       | Name | Enabled |
       | Abcd 1 | false |
       | Abc_d1* | false |
+
+  Scenario: Delete a group
+    When I tap in a "foo" group
+    And I wait to see the details dialog
+    And I tap the delete button
+    And I tap the Ok button in the confirmation dialog
+    Then I should not see "foo" group in a groups list
