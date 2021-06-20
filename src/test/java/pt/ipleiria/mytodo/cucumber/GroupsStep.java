@@ -10,19 +10,17 @@ import io.cucumber.java.Before;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
-import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.remote.DesiredCapabilities;
-
 import java.io.FileReader;
 import java.net.URL;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-
 import static org.junit.Assert.assertTrue;
 
 public class GroupsStep {
@@ -101,7 +99,7 @@ public class GroupsStep {
 
     @And("I tap the menu button")
     public void iTapTheMenuButton() throws Exception {
-        Utils.sleep(2000);
+        Utils.sleep(1000);
         By by = By.xpath("//android.widget.ImageButton[@content-desc = 'Open navigation drawer']");
         (new TouchAction((driver))).tap(TapOptions.tapOptions().withElement(ElementOption.element((driver).findElement(by)))).perform();
     }
@@ -116,11 +114,78 @@ public class GroupsStep {
 
     @Then("The list of groups must have a size greater than {int}")
     public void theListOfGroupsMustHaveASizeGreaterThan(int arg0) throws Exception {
-        Utils.sleep(2000);
+        Utils.sleep(1000);
         By by = By.id("pt.ipleiria.mytodo:id/group_list_item");
         List<AndroidElement> list = driver.findElements(by);
         assertTrue(list.size() > arg0);
     }
 
 
+    @When("I tap the Add button")
+    public void iTapTheAddButton() throws Exception {
+        Utils.sleep(1000);
+        By by = By.id("pt.ipleiria.mytodo:id/action_add");
+        (new TouchAction((driver))).tap(TapOptions.tapOptions().withElement(ElementOption.element((driver).findElement(by)))).perform();
+    }
+
+    @And("I wait to see the create dialog")
+    public void iWaitToSeeTheCreateDialog() throws Exception {
+        Utils.sleep(1000);
+        By by = By.id("pt.ipleiria.mytodo:id/edit_group_dialog");
+        driver.findElement(by);
+    }
+
+    @And("I enter {string} into the name input")
+    public void iEnterIntoTheNameInput(String arg0) throws Exception {
+        Utils.sleep(1000);
+        By by = By.id("pt.ipleiria.mytodo:id/group_name");
+        driver.findElement(by).sendKeys(arg0);
+    }
+
+    @And("I enter {string} into the member input")
+    public void iEnterIntoTheMemberInput(String arg0) throws Exception {
+        Utils.sleep(1000);
+        By by = By.id("pt.ipleiria.mytodo:id/group_members");
+        driver.findElement(by).sendKeys(arg0);
+    }
+
+    @And("I tap the save button")
+    public void iTapTheSaveButton() throws Exception {
+        Utils.sleep(1000);
+        By by = By.id("pt.ipleiria.mytodo:id/save_group");
+        (new TouchAction((driver))).tap(TapOptions.tapOptions().withElement(ElementOption.element((driver).findElement(by)))).perform();
+    }
+
+    @Then("I should see {string} group in a groups list")
+    public void iShouldSeeGroupInAGroupsList(String arg0) throws Exception{
+        By by = By.xpath(String.format("//android.widget.TextView[@resource-id='pt.ipleiria.mytodo:id/group_list_item_name' and @text='%s']", arg0));
+        int loops = 10;
+        List<AndroidElement> list = driver.findElements(by);
+        while (list.size() == 0 && loops > 0){
+            Utils.sleep(500);
+            list = driver.findElements(by);
+            loops --;
+        }
+        assertTrue(list.size() > 0);
+    }
+
+    @Then("I should see a {string} message")
+    public void iShouldSeeAMessage(String arg0) throws Exception {
+        By by = By.xpath(String.format("//android.widget.Toast[@text='%s']", arg0));
+        int loops = 10;
+        List<AndroidElement> list = driver.findElements(by);
+        while (list.size() == 0 && loops > 0){
+            Utils.sleep(500);
+            list = driver.findElements(by);
+            loops --;
+        }
+        assertTrue(list.size() > 0);
+    }
+
+    @Then("I should see the save button in {string} state")
+    public void iShouldSeeTheSaveButtonInState(String arg0) throws Exception {
+        Utils.sleep(1000);
+        By by = By.xpath(String.format("//android.widget.Button[@resource-id='pt.ipleiria.mytodo:id/save_group' and @enabled = '%s']", arg0));
+        driver.findElement(by);
+    }
 }
