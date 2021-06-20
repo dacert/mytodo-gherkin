@@ -2,7 +2,7 @@ package pt.ipleiria.mytodo.cucumber;
 
 import java.lang.String;
 
-class ProjectParameters {
+public class ProjectParameters {
   /**
    * User project parameter
    */
