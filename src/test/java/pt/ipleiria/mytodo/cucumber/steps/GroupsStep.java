@@ -147,4 +147,45 @@ public class GroupsStep {
         By by = By.xpath(String.format("//android.widget.Button[@resource-id='pt.ipleiria.mytodo:id/save_group' and @enabled = '%s']", arg0));
         driver.findElement(by);
     }
+
+    @When("I tap in a {string} group")
+    public void iTapInAGroup(String arg0) throws Exception  {
+        Utils.sleep(1000);
+        By by = By.xpath(String.format("//android.widget.TextView[@resource-id='pt.ipleiria.mytodo:id/group_list_item_name' and @text='%s']", arg0));
+        (new TouchAction((driver))).tap(TapOptions.tapOptions().withElement(ElementOption.element((driver).findElement(by)))).perform();
+    }
+
+    @And("I wait to see the details dialog")
+    public void iWaitToSeeTheDetailsDialog() throws Exception  {
+        Utils.sleep(1000);
+        By by = By.id("pt.ipleiria.mytodo:id/edit_group_dialog");
+        driver.findElement(by);
+    }
+
+    @And("I tap the delete button")
+    public void iTapTheDeleteButton() throws Exception {
+        Utils.sleep(1000);
+        By by = By.id("pt.ipleiria.mytodo:id/delete_group");
+        (new TouchAction((driver))).tap(TapOptions.tapOptions().withElement(ElementOption.element((driver).findElement(by)))).perform();
+    }
+
+    @And("I tap the Ok button in the confirmation dialog")
+    public void iTapTheOkButtonInTheConfirmationDialog() throws Exception {
+        Utils.sleep(1000);
+        By by = By.id("android:id/button1");
+        (new TouchAction((driver))).tap(TapOptions.tapOptions().withElement(ElementOption.element((driver).findElement(by)))).perform();
+    }
+
+    @Then("I should not see {string} group in a groups list")
+    public void iShouldNotSeeGroupInAGroupsList(String arg0) throws Exception {
+        By by = By.xpath(String.format("//android.widget.TextView[@resource-id='pt.ipleiria.mytodo:id/group_list_item_name' and @text='%s']", arg0));
+        int loops = 10;
+        List<AndroidElement> list = driver.findElements(by);
+        while (list.size() == 0 && loops > 0){
+            Utils.sleep(500);
+            list = driver.findElements(by);
+            loops --;
+        }
+        assertTrue(list.size() == 0);
+    }
 }
