@@ -172,7 +172,7 @@ public class GroupsStep {
     @And("I tap the Ok button in the confirmation dialog")
     public void iTapTheOkButtonInTheConfirmationDialog() throws Exception {
         Utils.sleep(1000);
-        By by = By.id("pt.ipleiria.mytodo:id/action_ok");
+        By by = By.id("android:id/button1");
         (new TouchAction((driver))).tap(TapOptions.tapOptions().withElement(ElementOption.element((driver).findElement(by)))).perform();
     }
 
