@@ -101,8 +101,8 @@ public class GroupsStep {
         driver.findElement(by).sendKeys(arg0);
     }
 
-    @And("I enter {string} into the member input")
-    public void iEnterIntoTheMemberInput(String arg0) throws Exception {
+    @And("I enter {string} into the members input")
+    public void iEnterIntoTheMembersInput(String arg0) throws Exception {
         Utils.sleep(1000);
         By by = By.id("pt.ipleiria.mytodo:id/group_members");
         driver.findElement(by).sendKeys(arg0);
@@ -148,8 +148,8 @@ public class GroupsStep {
         driver.findElement(by);
     }
 
-    @When("I tap in a {string} group")
-    public void iTapInAGroup(String arg0) throws Exception  {
+    @When("I tap in a group named {string}")
+    public void iTapInAGroupNamed(String arg0) throws Exception {
         Utils.sleep(1000);
         By by = By.xpath(String.format("//android.widget.TextView[@resource-id='pt.ipleiria.mytodo:id/group_list_item_name' and @text='%s']", arg0));
         (new TouchAction((driver))).tap(TapOptions.tapOptions().withElement(ElementOption.element((driver).findElement(by)))).perform();
@@ -188,4 +188,32 @@ public class GroupsStep {
         }
         assertTrue(list.size() == 0);
     }
+
+    @And("I should see {string} members in the group")
+    public void iShouldSeeMembersInTheGroup(String arg0) throws Exception{
+        Utils.sleep(2000);
+        By by = By.xpath(String.format("//android.widget.EditText[@resource-id='pt.ipleiria.mytodo:id/group_members' and @text='%s']", arg0));
+        driver.findElement(by);
+    }
+
+    @And("I should {string} a group with {string} name in a groups list")
+    public void iShouldAGroupWithNameInAGroupsList(String arg0, String arg1) throws Exception{
+        By by = By.xpath(String.format("//android.widget.TextView[@resource-id='pt.ipleiria.mytodo:id/group_list_item_name' and @text='%s']", arg0));
+        int loops = 10;
+        List<AndroidElement> list = driver.findElements(by);
+        while (list.size() == 0 && loops > 0){
+            Utils.sleep(500);
+            list = driver.findElements(by);
+            loops --;
+        }
+        assertTrue(list.size() == (arg0 == "false" ? 0 : 1));
+    }
+
+    @Then("I should see the details dialog with a group named {string}")
+    public void iShouldSeeTheDetailsDialogWithAGroupNamed(String arg0) throws Exception {
+        Utils.sleep(2000);
+        By by = By.xpath(String.format("//android.widget.EditText[@resource-id='pt.ipleiria.mytodo:id/group_name' and @text='%s']", arg0));
+        driver.findElement(by);
+    }
+
 }

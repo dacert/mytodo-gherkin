@@ -15,7 +15,7 @@ Feature: Manage groups
     When I tap the Add button
     And I wait to see the create dialog
     And I enter "foo" into the name input
-    And I enter "email@dominio.com; mail123@dominio.com" into the member input
+    And I enter "email@dominio.com; mail123@dominio.com" into the members input
     And I tap the save button
     Then I should see "foo" group in a groups list
 
@@ -39,9 +39,48 @@ Feature: Manage groups
       | Abcd 1 | false |
       | Abc_d1* | false |
 
+  Scenario: View details of a group that I am member
+    When I tap in a group named "details"
+    And I wait to see the details dialog
+    Then I should see the details dialog with a group named "details"
+
+  Scenario Outline: Change the name of a group that I'm the owner
+    When I tap in a group named "foo"
+    And I wait to see the details dialog
+    And I enter "<Name>" into the name input
+    And I tap the save button
+    Then I should see a "<Message>" message
+    And I should "<See>" a group with "<Name>" name in a groups list
+
+    Examples:
+      | Name | See | Message |
+      | duplicate | false | Name is duplicated |
+      | foo2 | true | Success |
+
+  Scenario Outline: Edit name validation
+    When I tap in a group named "foo2"
+    And I wait to see the details dialog
+    And I enter "<Name>" into the name input
+    Then I should see the save button in "<Enabled>" state
+
+    Examples:Letters and Numbers
+    Names need only letters and numbers to be valid
+
+      | Name | Enabled |
+      | Abcd1 | false |
+      | Abc_d1* | false |
+
+  Scenario: Edit group's member in a group that I am the owner
+    When I tap in a group named "foo2"
+    And I wait to see the details dialog
+    And I enter "email@dominio.com;mail123@dominio.com" into the members input
+    And I tap the save button
+    Then I tap in a group named "foo2"
+    And I should see "email@dominio.com;mail123@dominio.com" members in the group
+
   Scenario: Delete a group
-    When I tap in a "foo" group
+    When I tap in a group named "foo2"
     And I wait to see the details dialog
     And I tap the delete button
     And I tap the Ok button in the confirmation dialog
-    Then I should not see "foo" group in a groups list
+    Then I should not see "foo2" group in a groups list
