@@ -196,9 +196,9 @@ public class GroupsStep {
         driver.findElement(by);
     }
 
-    @And("I should {string} a group with {string} name in a groups list")
-    public void iShouldAGroupWithNameInAGroupsList(String arg0, String arg1) throws Exception{
-        By by = By.xpath(String.format("//android.widget.TextView[@resource-id='pt.ipleiria.mytodo:id/group_list_item_name' and @text='%s']", arg0));
+    @And("I should {string} a clickable group with {string} name in a groups list")
+    public void iShouldAGroupWithNameInAGroupsList(String arg0, String arg1) throws Exception {
+        By by = By.xpath(String.format("//android.widget.RelativeLayout[@clickable='true']//android.widget.TextView[@resource-id='pt.ipleiria.mytodo:id/group_list_item_name' and @text='%s']", arg1));
         int loops = 10;
         List<AndroidElement> list = driver.findElements(by);
         while (list.size() == 0 && loops > 0){
@@ -206,7 +206,8 @@ public class GroupsStep {
             list = driver.findElements(by);
             loops --;
         }
-        assertTrue(list.size() == (arg0 == "false" ? 0 : 1));
+        int compareWith = arg0.equalsIgnoreCase("false") ? 0 : 1;
+        assertTrue(list.size() == compareWith);
     }
 
     @Then("I should see the details dialog with a group named {string}")
