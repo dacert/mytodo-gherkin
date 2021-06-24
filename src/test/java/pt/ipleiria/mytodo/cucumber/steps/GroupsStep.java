@@ -118,7 +118,7 @@ public class GroupsStep {
     @Then("I should see {string} group in a groups list")
     public void iShouldSeeGroupInAGroupsList(String arg0) throws Exception{
         By by = By.xpath(String.format("//android.widget.TextView[@resource-id='pt.ipleiria.mytodo:id/group_list_item_name' and @text='%s']", arg0));
-        int loops = 10;
+        int loops = 20;
         List<AndroidElement> list = driver.findElements(by);
         while (list.size() == 0 && loops > 0){
             Utils.sleep(500);
@@ -131,7 +131,7 @@ public class GroupsStep {
     @Then("I should see a {string} message")
     public void iShouldSeeAMessage(String arg0) throws Exception {
         By by = By.xpath(String.format("//android.widget.Toast[@text='%s']", arg0));
-        int loops = 10;
+        int loops = 20;
         List<AndroidElement> list = driver.findElements(by);
         while (list.size() == 0 && loops > 0){
             Utils.sleep(500);
@@ -179,7 +179,7 @@ public class GroupsStep {
     @Then("I should not see {string} group in a groups list")
     public void iShouldNotSeeGroupInAGroupsList(String arg0) throws Exception {
         By by = By.xpath(String.format("//android.widget.TextView[@resource-id='pt.ipleiria.mytodo:id/group_list_item_name' and @text='%s']", arg0));
-        int loops = 10;
+        int loops = 20;
         List<AndroidElement> list = driver.findElements(by);
         while (list.size() == 0 && loops > 0){
             Utils.sleep(500);
@@ -199,7 +199,7 @@ public class GroupsStep {
     @And("I should {string} a clickable group with {string} name in a groups list")
     public void iShouldAGroupWithNameInAGroupsList(String arg0, String arg1) throws Exception {
         By by = By.xpath(String.format("//android.widget.RelativeLayout[@clickable='true']//android.widget.TextView[@resource-id='pt.ipleiria.mytodo:id/group_list_item_name' and @text='%s']", arg1));
-        int loops = 10;
+        int loops = 20;
         List<AndroidElement> list = driver.findElements(by);
         while (list.size() == 0 && loops > 0){
             Utils.sleep(500);
