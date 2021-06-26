@@ -19,7 +19,7 @@ import java.util.List;
 import static org.junit.Assert.assertTrue;
 
 
-public class GroupsStep {
+public class GroupsSteps {
     public AndroidDriver<AndroidElement> driver;
 
     @Before

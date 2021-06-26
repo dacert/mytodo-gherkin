@@ -1,0 +1,21 @@
+{
+    "server": "hub-cloud.browserstack.com",
+    "username": "xetesa_R3Ll9d",
+    "access_key": "ysnbxjsDqbmbp2iuzzpm",
+  
+    "capabilities": {
+      "project": "MyToDo-ToDos",
+      "build": "MyToDo-ToDos",
+      "name": "todos_test",
+      "browserstack.debug": true,
+      "app": "MyToDo"
+    },
+  
+    "environments": [{
+      "device": "Google Pixel 3",
+      "os_version":  "9.0"
+    },{
+      "device": "Samsung Galaxy S10e",
+      "os_version":  "9.0"
+    }]
+}
