@@ -6,7 +6,7 @@
     "capabilities": {
       "project": "MyToDo",
       "build": "MyToDo",
-      "name": "groups_test",
+      "name": "todos_test",
       "browserstack.debug": true,
       "app": "MyToDo"
     },

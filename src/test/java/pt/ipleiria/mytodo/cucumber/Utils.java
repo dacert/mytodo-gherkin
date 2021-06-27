@@ -6,14 +6,21 @@ import java.lang.String;
 import java.net.URL;
 import java.util.Arrays;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
 
+import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.android.AndroidElement;
+import io.appium.java_client.touch.TapOptions;
+import io.appium.java_client.touch.offset.ElementOption;
+import io.cucumber.java.Scenario;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
+import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
@@ -45,7 +52,7 @@ public class Utils {
   }
 
 
-  public static AndroidDriver setUp(String conf, int env) throws Exception {
+  public static AndroidDriver setUp(String conf, Scenario scenario, int env) throws Exception {
     JSONParser parser = new JSONParser();
     JSONObject config = (JSONObject) parser.parse(new FileReader(conf));
     JSONArray envs = (JSONArray) config.get("environments");
@@ -68,6 +75,8 @@ public class Utils {
       }
     }
 
+    capabilities.setCapability("name", scenario.getName());
+
     String username = System.getenv("BROWSERSTACK_USERNAME");
     if(username == null) {
       username = (String) config.get("username");
@@ -84,6 +93,40 @@ public class Utils {
     }
 
     return new AndroidDriver(new URL("http://"+username+":"+accessKey+"@"+config.get("server")+"/wd/hub"), capabilities);
+  }
+
+  public static List<AndroidElement> waitForSafe(AndroidDriver driver, By by, int seconds) throws Exception{
+    int loops = seconds * 2;
+    List<AndroidElement> list = driver.findElements(by);
+    while (list.size() == 0 && loops > 0){
+      Utils.sleep(500);
+      list = driver.findElements(by);
+      loops --;
+    }
+    return list;
+  }
+
+  public static List<AndroidElement> waitFor(AndroidDriver driver, By by, int seconds) throws Exception{
+    List<AndroidElement> list = waitForSafe(driver, by, seconds);
+    if(list.size() == 0) throw new Exception();
+    return list;
+  }
+
+  public static AndroidElement waitForElementSafe(AndroidDriver driver, By by, int seconds) throws Exception{
+    List<AndroidElement> list = waitForSafe(driver, by, seconds);
+    if(list.size() == 0) return null;
+    return list.get(0);
+  }
+
+  public static AndroidElement waitForElement(AndroidDriver driver, By by, int seconds) throws Exception{
+    AndroidElement el = waitForElementSafe(driver, by, seconds);
+    if(el == null) throw new Exception();
+    return el;
+  }
+
+  public static void waitForAndTouch(AndroidDriver driver, By by, int seconds) throws Exception{
+    AndroidElement el = waitForElement(driver, by, seconds);
+    (new TouchAction((driver))).tap(TapOptions.tapOptions().withElement(ElementOption.element(el))).perform();
   }
 
 }
