@@ -8,6 +8,7 @@ import io.cucumber.java.Scenario;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
 import org.openqa.selenium.By;
 import pt.ipleiria.mytodo.cucumber.ProjectParameters;
 import pt.ipleiria.mytodo.cucumber.Utils;
@@ -84,4 +85,39 @@ public class ToDosSteps {
         assertTrue(list.size() > arg0);
     }
 
+    @When("I tap the Add to-do button")
+    public void iTapTheAddToDoButton() throws Exception {
+        Utils.sleep(1000);
+        By by = By.id("pt.ipleiria.mytodo:id/action_add_todo");
+        Utils.waitForAndTouch(driver, by, WAITFOR);
+    }
+
+    @And("I wait to see the to-do create dialog")
+    public void iWaitToSeeTheToDoCreateDialog() throws Exception {
+        Utils.sleep(1000);
+        By by = By.id("pt.ipleiria.mytodo:id/edit_todo_dialog");
+        Utils.waitForElement(driver, by, WAITFOR);
+    }
+
+    @And("I enter {string} into the text input")
+    public void iEnterIntoTheTextInput(String arg0) throws Exception {
+        Utils.sleep(1000);
+        By by = By.id("pt.ipleiria.mytodo:id/todo_text");
+        AndroidElement el = Utils.waitForElement(driver, by, WAITFOR);
+        el.sendKeys(arg0);
+    }
+
+    @And("I tap the save to-do button")
+    public void iTapTheSaveToDoButton() throws Exception {
+        Utils.sleep(1000);
+        By by = By.id("pt.ipleiria.mytodo:id/save_todo");
+        Utils.waitForAndTouch(driver, by, WAITFOR);
+    }
+
+    @Then("I should see a clickable {string} to-do in a to-dos list")
+    public void iShouldSeeAEnabledToDoInAToDosList(String arg0) throws Exception {
+        By by = By.xpath(String.format("//android.widget.LinearLayout[@clickable='true']//android.widget.TextView[@resource-id='pt.ipleiria.mytodo:id/todo_list_item_text' and @text='%s']", arg0));
+        List<AndroidElement> list = Utils.waitForSafe(driver, by, WAITFOR);
+        assertTrue(list.size() > 0);
+    }
 }
