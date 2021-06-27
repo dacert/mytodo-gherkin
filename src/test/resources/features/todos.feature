@@ -17,4 +17,4 @@ Feature: Manage to-dos
     And I wait to see the to-do create dialog
     And I enter "Note to do" into the text input
     And I tap the save to-do button
-    Then I should see a clickable "Note to do" to-do in a to-dos list
+    Then I should see a "Note to do" to-do in a to-dos list

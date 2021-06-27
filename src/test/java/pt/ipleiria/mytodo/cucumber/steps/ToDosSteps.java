@@ -114,9 +114,9 @@ public class ToDosSteps {
         Utils.waitForAndTouch(driver, by, WAITFOR);
     }
 
-    @Then("I should see a clickable {string} to-do in a to-dos list")
+    @Then("I should see a {string} to-do in a to-dos list")
     public void iShouldSeeAEnabledToDoInAToDosList(String arg0) throws Exception {
-        By by = By.xpath(String.format("//android.widget.LinearLayout[@clickable='true']//android.widget.TextView[@resource-id='pt.ipleiria.mytodo:id/todo_list_item_text' and @text='%s']", arg0));
+        By by = By.xpath(String.format("//android.widget.TextView[@resource-id='pt.ipleiria.mytodo:id/todo_list_item_text' and @text='%s']", arg0));
         List<AndroidElement> list = Utils.waitForSafe(driver, by, WAITFOR);
         assertTrue(list.size() > 0);
     }
