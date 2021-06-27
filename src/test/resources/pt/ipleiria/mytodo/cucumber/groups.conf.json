@@ -1,11 +1,11 @@
 {
     "server": "hub-cloud.browserstack.com",
-    "username": "xetesa_R3Ll9d",
-    "access_key": "ysnbxjsDqbmbp2iuzzpm",
+    "username": "vesoba_nUH2wd",
+    "access_key": "UGQnjAS3VF92C37EkGKV",
   
     "capabilities": {
-      "project": "MyToDo-Groups",
-      "build": "MyToDo-Groups",
+      "project": "MyToDo",
+      "build": "MyToDo",
       "name": "groups_test",
       "browserstack.debug": true,
       "app": "MyToDo"

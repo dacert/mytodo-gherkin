@@ -45,12 +45,12 @@ Feature: Manage groups
       | Abcd1 | email@dominio.com; mail123@dominio.com | true |
 
   Scenario: View details of a group that I am member
-    When I tap in a group named "details"
+    When I tap in an edit icon of a group named "details"
     And I wait to see the details dialog
     Then I should see the details dialog with a group named "details"
 
   Scenario Outline: Change the name of a group that I'm the owner
-    When I tap in a group named "foo"
+    When I tap in an edit icon of a group named "foo"
     And I wait to see the details dialog
     And I enter "<Name>" into the name input
     And I tap the save button
@@ -63,7 +63,7 @@ Feature: Manage groups
       | foo2 | true | Success |
 
   Scenario Outline: Edit name validation
-    When I tap in a group named "foo2"
+    When I tap in an edit icon of a group named "foo2"
     And I wait to see the details dialog
     And I enter "<Name>" into the name input
     And I enter "<Members>" into the members input
@@ -81,15 +81,15 @@ Feature: Manage groups
       | Abcd1 | email@dominio.com; mail123@dominio.com | true |
 
   Scenario: Edit group's member in a group that I am the owner
-    When I tap in a group named "foo2"
+    When I tap in an edit icon of a group named "foo2"
     And I wait to see the details dialog
     And I enter "email@dominio.com;mail123@dominio.com" into the members input
     And I tap the save button
-    Then I tap in a group named "foo2"
+    Then I tap in an edit icon of a group named "foo2"
     And I should see "email@dominio.com;mail123@dominio.com" members in the group
 
   Scenario: Delete a group
-    When I tap in a group named "foo2"
+    When I tap in an edit icon of a group named "foo2"
     And I wait to see the details dialog
     And I tap the delete button
     And I tap the Ok button in the confirmation dialog
