@@ -139,4 +139,25 @@ public class ToDosSteps {
         By by = By.xpath(String.format("//android.widget.Button[@resource-id='pt.ipleiria.mytodo:id/save_todo' and @enabled = '%s']", arg0));
         Utils.waitForElement(driver, by, WAITFOR);
     }
+
+    @And("I tap the delete to-do button")
+    public void iTapTheDeleteToDoButton() throws Exception {
+        Utils.sleep(1000);
+        By by = By.id("pt.ipleiria.mytodo:id/delete_todo");
+        Utils.waitForAndTouch(driver, by, WAITFOR);
+    }
+
+    @And("I tap the Ok button in the delete confirmation dialog")
+    public void iTapTheOkButtonInTheDeleteConfirmationDialog() throws Exception {
+        Utils.sleep(1000);
+        By by = By.id("android:id/button1");
+        Utils.waitForAndTouch(driver, by, WAITFOR);
+    }
+
+    @Then("I should not see {string} to-do in a to-dos list")
+    public void iShouldNotSeeToDoInAToDosList(String arg0) throws Exception {
+        By by = By.xpath(String.format("//android.widget.TextView[@resource-id='pt.ipleiria.mytodo:id/todo_list_item_text' and @text='%s']", arg0));
+        List<AndroidElement> list = Utils.waitForSafe(driver, by, WAITFOR);
+        assertTrue(list.size() == 0);
+    }
 }

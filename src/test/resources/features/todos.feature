@@ -37,3 +37,11 @@ Feature: Manage to-dos
       | Text  | Enabled |
       |  | false |
       | Note to do  | true |
+
+  Scenario: Delete a to-do that I have created
+    When I tap in a "Note to do, edited" to-do
+    And I wait to see the to-do edit dialog
+    And I tap the delete to-do button
+    And I tap the Ok button in the delete confirmation dialog
+    Then I should not see "Note to do, edited" to-do in a to-dos list
+
