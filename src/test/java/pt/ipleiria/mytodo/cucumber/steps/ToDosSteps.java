@@ -120,4 +120,23 @@ public class ToDosSteps {
         List<AndroidElement> list = Utils.waitForSafe(driver, by, WAITFOR);
         assertTrue(list.size() > 0);
     }
+
+    @When("I tap in a {string} to-do")
+    public void iTapInAToDo(String arg0) throws Exception {
+        Utils.sleep(1000);
+        By by = By.xpath(String.format("//android.widget.TextView[@resource-id='pt.ipleiria.mytodo:id/todo_list_item_text' and @text='%s']", arg0));
+        Utils.waitForAndTouch(driver, by, WAITFOR);
+    }
+
+    @And("I wait to see the to-do edit dialog")
+    public void iWaitToSeeTheToDoEditDialog() throws Exception {
+        iWaitToSeeTheToDoCreateDialog();
+    }
+
+    @Then("I should see the save to-do button in {string} state")
+    public void iShouldSeeTheSaveToDoButtonInState(String arg0) throws Exception {
+        Utils.sleep(1000);
+        By by = By.xpath(String.format("//android.widget.Button[@resource-id='pt.ipleiria.mytodo:id/save_todo' and @enabled = '%s']", arg0));
+        Utils.waitForElement(driver, by, WAITFOR);
+    }
 }
