@@ -110,7 +110,7 @@ public class ToDosSteps {
     @And("I tap the save to-do button")
     public void iTapTheSaveToDoButton() throws Exception {
         Utils.sleep(1000);
-        By by = By.id("pt.ipleiria.mytodo:id/save_todo");
+        By by = By.id("pt.ipleiria.mytodo:id/dialog_action_save");
         Utils.waitForAndTouch(driver, by, WAITFOR);
     }
 
@@ -136,14 +136,14 @@ public class ToDosSteps {
     @Then("I should see the save to-do button in {string} state")
     public void iShouldSeeTheSaveToDoButtonInState(String arg0) throws Exception {
         Utils.sleep(1000);
-        By by = By.xpath(String.format("//android.widget.Button[@resource-id='pt.ipleiria.mytodo:id/save_todo' and @enabled = '%s']", arg0));
+        By by = By.xpath(String.format("//android.widget.Button[@resource-id='pt.ipleiria.mytodo:id/dialog_action_save' and @enabled = '%s']", arg0));
         Utils.waitForElement(driver, by, WAITFOR);
     }
 
     @And("I tap the delete to-do button")
     public void iTapTheDeleteToDoButton() throws Exception {
         Utils.sleep(1000);
-        By by = By.id("pt.ipleiria.mytodo:id/delete_todo");
+        By by = By.id("pt.ipleiria.mytodo:id/dialog_action_delete");
         Utils.waitForAndTouch(driver, by, WAITFOR);
     }
 
