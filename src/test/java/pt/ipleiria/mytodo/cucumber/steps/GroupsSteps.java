@@ -116,7 +116,7 @@ public class GroupsSteps {
     @And("I tap the save button")
     public void iTapTheSaveButton() throws Exception {
         Utils.sleep(1000);
-        By by = By.id("pt.ipleiria.mytodo:id/save_group");
+        By by = By.id("pt.ipleiria.mytodo:id/dialog_action_save");
         Utils.waitForAndTouch(driver, by, WAITFOR);
     }
 
@@ -137,7 +137,7 @@ public class GroupsSteps {
     @Then("I should see the save button in {string} state")
     public void iShouldSeeTheSaveButtonInState(String arg0) throws Exception {
         Utils.sleep(1000);
-        By by = By.xpath(String.format("//android.widget.Button[@resource-id='pt.ipleiria.mytodo:id/save_group' and @enabled = '%s']", arg0));
+        By by = By.xpath(String.format("//android.widget.Button[@resource-id='pt.ipleiria.mytodo:id/dialog_action_save' and @enabled = '%s']", arg0));
         Utils.waitForElement(driver, by, WAITFOR);
     }
 
@@ -158,7 +158,7 @@ public class GroupsSteps {
     @And("I tap the delete button")
     public void iTapTheDeleteButton() throws Exception {
         Utils.sleep(1000);
-        By by = By.id("pt.ipleiria.mytodo:id/delete_group");
+        By by = By.id("pt.ipleiria.mytodo:id/dialog_action_delete");
         Utils.waitForAndTouch(driver, by, WAITFOR);
     }
 
